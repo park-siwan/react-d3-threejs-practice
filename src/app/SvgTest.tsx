@@ -1,6 +1,47 @@
-import React from 'react';
+'use client';
+import { select } from 'd3';
+import React, { useEffect, useRef } from 'react';
 
 const SvgTest = () => {
+  const canvasRef = useRef(null);
+
+  useEffect(() => {
+    const canvas = select(canvasRef.current);
+    const svg = canvas.append('svg').attr('height', 1000).attr('width', 1000);
+
+    svg
+      .append('text')
+      .attr('x', 200)
+      .attr('y', 200)
+      .text('hello world')
+      .style('font-weight', 'bold')
+      .style('font-size', '34px')
+      .style('font-family', 'pacifico');
+
+    svg
+      .append('rect')
+      // .attr('x', 200)
+      // .attr('y', 200)
+      .attr('width', 200)
+      .attr('height', 200)
+      .attr('fill', 'hotpink');
+
+    svg
+      .append('circle')
+      .attr('cx', 200)
+      .attr('cy', 200)
+      .attr('r', 50)
+      .attr('fill', 'blue');
+
+    svg
+      .append('line')
+      .attr('x1', 200)
+      .attr('y1', 200)
+      .attr('x2', 300)
+      .attr('y2', 300)
+      .attr('stroke', 'red');
+  }, []);
+
   return (
     <div>
       2023-05-30 SVG 학습
@@ -37,7 +78,7 @@ const SvgTest = () => {
           hello world
         </text>
       </svg>
-      <div className='canvas'></div>
+      <div className='canvas' ref={canvasRef}></div>
     </div>
   );
 };

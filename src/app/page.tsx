@@ -1,6 +1,6 @@
 import D3Chart from './D3Chart';
 import D3Test from './D3Test';
-import SvgTest from './Svgtest';
+import SvgTest from './SvgTest';
 
 export default function Home() {
   return (
