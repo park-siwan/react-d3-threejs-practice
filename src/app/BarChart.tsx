@@ -1,5 +1,5 @@
 'use client';
-import { select } from 'd3';
+import { easeLinear, select } from 'd3';
 import React, { useEffect, useRef, useState } from 'react';
 
 const BarChart = () => {
@@ -9,24 +9,37 @@ const BarChart = () => {
   useEffect(() => {
     const svg = select(svgRef.current);
     const barWidth = 30;
+    const data2 = [110, 50, 20, 30, 50, 90, 120, 70];
     data.forEach((data, index) => {
       svg
         .append('rect')
+        .attr('id', `bar${index}`)
         .attr('height', data)
         .attr('width', barWidth)
         .attr('x', (barWidth + 10) * index)
         .attr('y', 300 - data)
-        .attr('fill', 'red');
+        .transition()
+        .duration(3000)
+        .ease(easeLinear)
+        .style('fill', 'red')
+        .attr('height', data2[index])
+        .attr('y', 300 - data2[index]);
 
-      svg
-        .append('text')
-        .attr('x', (barWidth + 10) * index)
-        .attr('y', 300 - data - 10)
-        .text(data)
-        .style('font-size', '0.85em')
-        .style('color', '#222');
+      /**텍스트 넣는 방법 */
+      // svg
+      //   .append('text')
+      //   .attr('x', (barWidth + 10) * index)
+      //   .attr('y', 300 - data - 10)
+      //   .text(data)
+      //   .style('font-size', '0.85em')
+      //   .style('color', '#222');
     });
-    // svg
+    select('#bar0')
+      .transition()
+      .duration(1000)
+      .ease(easeLinear)
+      .style('fill', 'blue')
+      .delay(3000);
   }, [svgRef, data]);
 
   return (
